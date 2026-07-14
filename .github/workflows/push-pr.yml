@@ -1,0 +1,33 @@
+name: Push PR
+on:
+    push:
+        branches:
+            - main
+            - "release/**"
+        paths:
+            - 'src/**'
+            - 'package.json'
+            - 'package-lock.json'
+            - 'yarn.lock'
+            - '.github/workflows/push-pr.yml'
+    pull_request:
+        branches:
+            - main
+            - "release/**"
+        paths:
+            - 'src/**'
+            - 'package.json'
+            - 'package-lock.json'
+            - 'yarn.lock'
+            - '.github/workflows/push-pr.yml'
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Run tests
+              run: |
+                 npm test
+
+
